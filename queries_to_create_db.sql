@@ -21,7 +21,7 @@ CREATE TABLE `roles` (
   `RoleID` int(11) NOT NULL auto_increment,
   `RoleName` varchar(20) NOT NULL,
   PRIMARY KEY  (`RoleID`),
-  KEY `roleName_idx`(`RoleName`)
+  KEY `roleName_idx`(`RoleID`)
 )
 
 --

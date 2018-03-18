@@ -46,13 +46,6 @@
       exit;
     }
 
-    /**
-     * Apologizes to user with message.
-     */
-    function apologize($message)
-    {
-      render("apology.php", ["message" => $message]);
-    }
 
     /**
      * Facilitates debugging by dumping contents of argument(s)
@@ -124,9 +117,10 @@
           require(VIEWS_PATH . "/global_views/header_2.php");  
 
         }
-
-
+        
         require(VIEWS_PATH . "/{$view}");
+
+
         if ($view == "register_form.php" || $view == "login_form.php" || $view == "apology.php")
         {
           require(VIEWS_PATH . "/global_views/footer.php");

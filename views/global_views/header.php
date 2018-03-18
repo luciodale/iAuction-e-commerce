@@ -9,6 +9,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="/img/apple_icon.png">
 
   <meta name="description" content="">
   <meta name="author" content="">
@@ -21,15 +22,17 @@
 
   <link href="/css/home.css" rel="stylesheet"/>
 
+  <link href="/css/tooltip.css" rel="stylesheet"/>
+
   <link href="/css/signin_register.css" rel="stylesheet"/>
 
   <link href="https://fonts.googleapis.com/css?family=Fugaz+One" rel="stylesheet">
 
 
   <?php if (isset($title)): ?>
-    <title><?= htmlspecialchars($title) ?></title>
+    <title><?= $title ?></title>
   <?php else: ?>
-    <title>Scratch Auction</title>
+    <title>iAuction</title>
   <?php endif ?>
 
 

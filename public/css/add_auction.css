@@ -1,0 +1,44 @@
+
+
+.container-title {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.form-container {
+  width: 100%;
+}
+
+
+.form-group {
+  width: 100%;
+}
+
+.button-upload {
+  width: 200px;
+  overflow: hidden;
+}
+
+.tool-tip-first {
+  margin-left: 5px;
+}
+
+.submit-button{
+  position: relative;
+  width: 100%;
+}
+
+.tool_tip {
+  z-index: 40;
+}
+
+
+@media (max-width: 992px) {
+  .form-container {
+    padding-right: 10%;
+    padding-left: 10%;
+  }
+
+}
+
+

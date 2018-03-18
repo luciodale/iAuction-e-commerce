@@ -5,18 +5,20 @@
 body {
   padding-bottom: 40px;
   color: #5a5a5a;
+    /*font-family: 'Lato', sans-serif;*/
 }
 
 footer {
   width:100%;
-  height: 30px;
+  height: 40px;
   background-color: black;
   color:rgba(120, 120, 120, 1);
-  position: fixed;
-  bottom:0;
-  margin:auto;
   text-align: center;
+  margin-top: 30px; 
+  margin-bottom: -40px;
+  padding: 1rem;
 }
+
 
 
 /* CUSTOMIZE THE NAVBAR
@@ -28,7 +30,7 @@ footer {
   top: 0;
   right: 0;
   left: 0;
-  z-index: 20;
+  z-index: 2000;
 }
 
 .navbar-brand {
@@ -40,10 +42,19 @@ footer {
   height:300px;
 }
 
+a.dropdown-toggle {
+  color:yellow;
+}
+
 .dropdown-profile {
   width:auto;
   height:auto;
   padding: 10px;
+}
+
+.advancedSearchWrapper {
+  width:200px;
+  margin-left: 20px;
 }
 
 .navbar .nav > .active > a,
@@ -84,7 +95,7 @@ footer {
 }
 
 .top-filters {
-  margin-left: 5%;
+  margin-left: 25px;
 }
 
 .input-group {
@@ -115,6 +126,13 @@ footer {
 
 /* RESPONSIVE CSS
 -------------------------------------------------- */
+@media (max-width: 1000px) {
+  .advancedSearchWrapper {
+    width: 130px;
+    margin-left: -5px;
+  }
+}
+
 
 @media (min-width: 768px) {
   /* Navbar positioning foo */
@@ -154,8 +172,16 @@ footer {
   }
 
   .navbar .nav > .dropdown {
-    margin-left: 0%;
+    margin-left: 0px;
   }
+
+  .advancedSearchWrapper {
+    margin-left: 0px;
+    width: 100%;
+  }
+  .top-filters {
+  margin-left: 10px;
+}
 }
 
 

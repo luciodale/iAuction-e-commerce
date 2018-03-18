@@ -13,12 +13,12 @@
         <!-- RADIO BUTTONS -->
         <div class="form-group form-group_register">
             <p class="radio-buttons">Buyer</p>
-            <input autocomplete="off" autofocus class="form-control" name="role" value="buyer" placeholder="Type" type="radio" checked>
+            <input autocomplete="off" autofocus class="form-control" name="role" value="1" placeholder="Type" type="radio" tabindex=5 checked>
 
             <br>
 
             <p class="radio-buttons">Seller</p>
-            <input autocomplete="off" autofocus class="form-control" name="role" value="seller" placeholder="Type" type="radio">
+            <input autocomplete="off" autofocus class="form-control" name="role" value="2" placeholder="Type" tabindex=6 type="radio">
         </div>
 
         <br>
@@ -26,10 +26,10 @@
         <!-- PASSWORD FIELDS -->
         <div style="margin-top:-12px;">
           <div class="form-group form-group_register">
-            <input class="form-control" name="password" placeholder="password" value="<?php echo $form['password'] ?? '' ?>" type="password"/>
+            <input class="form-control" name="password" placeholder="password" value="<?php echo $form['password'] ?? '' ?>" tabindex=7 type="password"/>
         </div>
         <div class="form-group form-group_register">
-            <input class="form-control" name="confirmation" placeholder="re-enter Password" value="<?php echo $form['confirmation'] ?? '' ?>" type="password"/>
+            <input class="form-control" name="confirmation" placeholder="re-enter Password" value="<?php echo $form['confirmation'] ?? '' ?>" tabindex=8 type="password"/>
         </div>
 
     </div>
@@ -40,22 +40,22 @@
 
     <!-- USERNAME -->
     <div class="form-group form-group_register">
-        <input autocomplete="off" autofocus class="form-control" name="username" placeholder="username" type="text" value="<?php echo $form['username'] ?? '' ?>" autofocus/>
+        <input autocomplete="off" autofocus class="form-control" name="username" placeholder="username" type="text" tabindex=1 value="<?php echo $form['username'] ?? '' ?>" autofocus/>
     </div>
 
     <!-- EMAIL -->
     <div class="form-group form-group_register">
-        <input autocomplete="off" autofocus class="form-control" name="email" placeholder="email" value="<?php echo $form['email'] ?? '' ?>" type="text"/>
+        <input autocomplete="off" autofocus class="form-control" name="email" placeholder="email" value="<?php echo $form['email'] ?? '' ?>" type="text" tabindex=2 />
     </div>
 
     <!-- FIRST NAME -->
     <div class="form-group form-group_register">
-        <input autocomplete="off" autofocus class="form-control" name="firstname" placeholder="first name" value="<?php echo $form['firstname'] ?? '' ?>" type="text"/>
+        <input autocomplete="off" autofocus class="form-control" name="firstname" placeholder="first name" value="<?php echo $form['firstname'] ?? '' ?>" type="text" tabindex=3/>
     </div>
 
     <!-- LASTNAME -->
     <div class="form-group form-group_register">
-        <input autocomplete="off" autofocus class="form-control" name="lastname" placeholder="last name" value ="<?php echo $form['lastname'] ?? '' ?>" type="text"/>
+        <input autocomplete="off" autofocus class="form-control" name="lastname" placeholder="last name" value ="<?php echo $form['lastname'] ?? '' ?>" tabindex=4 type="text"/>
     </div>
 
     <!-- REGISTER BUTTON -->

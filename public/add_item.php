@@ -10,7 +10,7 @@ if (is_get_request())
  render("add_item_form.php", ["title" => "Add Item"]);
 }
 
-if (is_post_request())
+else
 {
   $form = [];
   $form['item_name'] = h($_POST['item_name']);
@@ -28,8 +28,9 @@ if (is_post_request())
 
   if($result === true) 
   {
-    $objects = displayAuction_db();
-    render("home.php", ["GridInfo" => $objects[0], "GridImages" => $objects[1]]);
+    // $objects = displayAuction_db();
+    // render("home.php", ["GridInfo" => $objects[0], "GridImages" => $objects[1]]);
+    redirect("index.php");
   }
   else
   {

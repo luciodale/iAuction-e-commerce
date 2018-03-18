@@ -1,6 +1,6 @@
 <?php
 
-// Auction Login *************************************************
+// User Login *************************************************
 function validate_login($info) {
 
   $errors = [];
@@ -25,7 +25,7 @@ function validate_login($info) {
   return $errors;
 }
 
-// Auction Registration *************************************************
+// User Registration *************************************************
 function validate_registration($info, $pdo){
 
   $errors = [];
@@ -128,6 +128,75 @@ function validate_input($input) {
   return true;
 }
 
+function validate_input_less_restricted($input) {
+
+  $prohibited = ["<", ">", "\"", "'", "@" , "#", "$", "%", "^", "*", "+", "]", "[", "{", "}", "\\", ";", "/", "|", "~", "`", "="];
+
+  foreach ($prohibited as $value) {
+
+    if(strripos($input, $value) !== false){
+      return false;
+    }
+  }
+  return true;
+}
+
+// Edit Profile *************************************************
+function validate_edit_profile($input, $conf){
+
+  $errors = [];
+
+  foreach ($input as $key => $value) {
+    // checking for special characters (allowed for password and email)
+    if($key != 'Password' && $key != 'Email'){
+      if (preg_match('/[^A-Za-z0-9]+/', $value))
+      {
+        $errors[] = "The " . $key . " contains illegal characters";
+        return $errors;
+      }
+    }
+  }
+
+  if (empty($input['FirstName']) || empty($input['LastName']) || empty($input['Email'])){
+    $errors[] = "Could not save changes. Your firstname, lastname, and email are required.";
+  }
+  else if(!validate_passw($input['Password']))
+  {
+    $errors[] = "The password contains illegal characters";
+  }
+  else if ((!(empty($input['Password'] )) || !(empty($conf["Confirmation"]))) && ($input["Password"] != $conf["Confirmation"]))
+  {
+    $errors[] = "Could not save changes. Your passwords did not match";
+  }
+
+   // email validation
+  else if (!filter_var($input['Email'], FILTER_VALIDATE_EMAIL)) 
+  {
+    $errors[] = "Email is not valid";
+  }
+
+  // first name validation
+  else if(!has_length($input['FirstName'], ['min' => 3, 'max' => 40])) 
+  {
+    $errors[] = "First name must be between 3 and 40 characters";
+  } 
+
+  // last name validation
+  else if(!has_length($input['LastName'], ['min' => 3, 'max' => 40])) 
+  {
+    $errors[] = "Last name must be between 3 and 40 characters";
+  } 
+
+  // password validation
+  else if(!empty($input['Password']) && !has_length($input['Password'], ['min' => 6, 'max' => 255])) 
+  {
+    $errors[] = "Password must be between 6 and 255 characters";
+  }
+
+  return $errors;
+}
+
+
 // Auction Creation *************************************************
 function validate_auction($info){
 
@@ -142,38 +211,42 @@ function validate_auction($info){
      return $errors;
    }
 
-   if(!validate_input($value)) 
+   if(!validate_input_less_restricted($value)) 
    {
     $errors[] = "The " . $key . " contains illegal characters";
     return $errors;
   }
-  }
+}
 
-  if(!has_length($info['item_name'], ['min' => 10, 'max' => 40])) 
-  {
-    $errors[] = "Item name must be between 10 and 40 characters";
-  }
+if(!has_length($info['item_name'], ['min' => 10, 'max' => 70])) 
+{
+  $errors[] = "Item name must be between 10 and 40 characters";
+}
+              // item description validation
+if(!has_length($info['item_description'], ['min' => 10, 'max' => 500])) 
+{
+ $errors[] = "Item description must be between 10 and 200 characters";
+} 
 
-                // item description validation
-  if(!has_length($info['item_description'], ['min' => 10, 'max' => 200])) 
-  {
-   $errors[] = "Item description must be between 10 and 200 characters";
-  } 
+if($info['item_start_price'] > $info['item_reserve_price']) 
+{
+ $errors[] = "Reserve price must be greater than initial price";
+} 
 
-                  // item price validation
-  if(!is_numeric($info['item_start_price']) || !is_numeric($info['item_reserve_price']))
-  {
-   $errors[] = "Start and reserve prices must be numbers";
-  }
+                    // item price validation
+if(!is_numeric($info['item_start_price']) || !is_numeric($info['item_reserve_price']))
+{
+ $errors[] = "Start and reserve prices must be numbers";
+}
 
-                  // category and condition validation
-  if ($info["ItemCategory"] == "notSelected" || $info["ItemCondition"] == "notSelected" || 
-    $info["end_time"] == "notSelected")
-  {
-    $errors[] = "Category, Condition, and Time must be selected";
-  }
+                    // category and condition validation
+if ($info["ItemCategory"] == "notSelected" || $info["ItemCondition"] == "notSelected" || 
+  $info["end_time"] == "notSelected")
+{
+  $errors[] = "Category, Condition, and Time must be selected";
+}
 
-  return $errors;
+return $errors;
 }
 
 function validate_images($images) {
@@ -279,7 +352,35 @@ function rearrange($arr){
   return $new;
 }
 
-// *****************************************
+// Bid Sumbission *************************************************
+function validate_bid($currentItem, $bidsList) {
 
+  $errors = [];
+
+  if(isset($bidsList['bids'][0])){
+    $currentBidPrice = $bidsList['bids'][0]['BidPrice'];
+  } else {
+    $currentBidPrice = $currentItem['StartPrice'];
+  }
+
+  if (2 == $_SESSION['role'] || 3 == $_SESSION['role']) {
+    $errors [] = "Sellers and admin cannot bid";
+  }
+
+  if (!is_numeric($currentItem['bid_price'])) {
+    $errors [] = "Your bid could not be processed. Please, put in a numeric value";
+  }
+  else if ($currentItem['StartPrice'] > $currentItem['bid_price']) {
+    $errors [] = "Your bid could not be processed. It must at least be as high as the starting price";
+  }
+  else if ($currentBidPrice >= $currentItem['bid_price']) {
+   $errors [] = "Your bid could not be processed. It must at least be higher than the current highest bid";
+ }
+ else if ($currentItem['EndTime'] < date('Y-m-d H:i:s')) {
+  $errors [] = "The auction has expired. You can no longer submit a bid.";
+}
+
+return $errors;
+}
 
 ?>

@@ -30,15 +30,7 @@ if (is_post_request())
         // if username or password are wrong
     if(is_blank($errors))
     {
-
       render("login_form.php", ["errors" => "Please, use valid <strong>username</strong> and <strong>password</strong>"]);
-        // remember that user's now logged in by storing user's ID in session
-        // store id, username and role type
-      $_SESSION["id"] = $row["UserID"];
-      $_SESSION["username"] = $info['username']; 
-      $_SESSION["role"] = $row["roleName"];  
-
-      return true;
     }
     else
     {

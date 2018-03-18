@@ -1,13 +1,14 @@
 <?php
 require_once("../includes/functions_db.php"); 
+
 ?>
 <!DOCTYPE html>
-
 <head>
 
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="/img/apple_icon.png">
 
   <meta name="description" content="">
   <meta name="author" content="">
@@ -18,16 +19,25 @@ require_once("../includes/functions_db.php");
   <link href="/css/bootstrap.min.css" rel="stylesheet"/>
 
   <link href="/css/home.css" rel="stylesheet"/>
-  <link href="/css/global.css" rel="stylesheet"/>
-  <link href="/css/place_bid.css" rel="stylesheet"/>
 
-  <link href="https://fonts.googleapis.com/css?family=Fugaz+One" rel="stylesheet">
+  <link href="/css/tooltip.css" rel="stylesheet"/>
+
+  <link href="/css/global.css" rel="stylesheet"/>
+      
+  <link href="/css/place_bid_view.css" rel="stylesheet"/>
+
+    <link href="/css/watchlist.css" rel="stylesheet"/>
+
+    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+
+
+
 
 
   <?php if (isset($title)): ?>
-    <title>SA:  <?= h($title) ?></title>
+    <title>iAuction:  <?= $title ?></title>
   <?php else: ?>
-    <title>Scratch Auction</title>
+    <title>iAuction</title>
   <?php endif ?>
 
 </head>
@@ -47,27 +57,16 @@ require_once("../includes/functions_db.php");
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
               </button>
-              <a class="navbar-brand" href="<?php echo '/'; ?>"> <img src="<?php echo IMG_PATH . '/logo.png'; ?>" width="75"></a>
+              <a class="navbar-brand" href="/"> <img src="<?php echo IMG_PATH . '/logo.png'; ?>" width="75"></a>
             </div>
             <div id="navbar" class="collapse navbar-collapse">  
               <div class="col-sm-4 col-md-4">
-                <form class="navbar-form" role="search" method="get">
+                <form class="navbar-form" role="search" action="index.php" method="post">
                   <div class="input-group">
+                    <!-- SEARCH BAR -->
                     <input type="text" class="form-control" placeholder="Search" maxlength="50" name="q"/>
                     <div class="input-group-btn">
                       <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
-                      <?php 
-
-                      if (isset($_GET["q"]) && $_GET["q"] != "") {
-                        unset($GridInfo);
-                        unset($GridImages);
-
-                        $objects3 = Searchbar($_GET["q"]);
-
-                        $GridInfo = $objects3[0];
-                        $GridImages = $objects3[1];
-                      }
-                      ?>
                     </div>
                   </div>
                 </form>
@@ -80,66 +79,52 @@ require_once("../includes/functions_db.php");
 
                 <li> 
                   <div class="row">
-                    <div class="col-lg-2">
+                    <div class="col-sm-1 advancedSearchWrapper">
                       <ul class="nav navbar-nav">
                         <li class="dropdown">
-                          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Filters<span class="caret"></span></a>
+                          <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Filters<span class="caret"></span></a>
 
-                          <ul class="dropdown-menu dropdown-menu-right" style="height:410px;">
-                            <li><a href="#">My Current Bids</a></li>
-                            <li><a href="#">My Winning Bids</a></li>
-                            <li role="separator" class="divider"></li>
-                            <li class="dropdown-header">Advanced Filters</li>
+                          <ul class="dropdown-menu dropdown-menu-right" style="height:340px;">
+                            <li class="dropdown-header">Set your search criteria</li>
                             <li><a href="#">
 
-                              <form class="form-horizontal" method="get" role="form">
+
+                              <form id="adsearch" class="form-horizontal" action="index.php" method="post" role="form">
 
                                 <label for="filter">Options</label>
 
-                                <select name="ItemT" class="form-control" style="display:block; margin-bottom: 10px;">
-                                  <option value="0" selected>Item Type</option>
+                                <select name="ItemT" id="type" class="form-control" style="display:block; margin-bottom: 10px;">
+                                  <option value="" selected>Category</option>
                                   <optgroup></optgroup>
-                                  <option value="6">Luxury</option>
-                                  <option value="5">Sports</option>
-                                  <option value="4">Electronics</option>
-                                  <option value="3">Entertainment</option>
-                                  <option value="2">Apparel</option>
-                                  <option value="1">Collectibles</option>
+                                  <option value="1">Luxury</option>
+                                  <option value="2">Sports</option>
+                                  <option value="3">Electronics</option>
+                                  <option value="4">Entertainment</option>
+                                  <option value="5">Apparel</option>
+                                  <option value="6">Collectibles</option>
                                 </select>
 
-                                <select name="ItemCon" class="form-control" style="display:block;">
-                                  <option value="0" selected>Item Condition</option>
+                                <select name="ItemCon" id="condition" class="form-control" style="display:block;">
+                                  <option value="" selected>Item Condition</option>
                                   <optgroup></optgroup>
-                                  <option value="New">New</option>
-                                  <option value="Excellent">Excellent</option>
-                                  <option value="Good">Good</option>
-                                  <option value="Average">Average</option>
-                                  <option value="Bad">Bad</option>
+                                  <option value="5">New</option>
+                                  <option value="4">Excellent</option>
+                                  <option value="3">Good</option>
+                                  <option value="2">Average</option>
+                                  <option value="1">Bad</option>
                                 </select>
 
                                 <label style="margin-top: 10px; display:block;" for="contain">Starting Price</label>
-                                <input class="form-control" type="number" name="SPrice"/>
+                                <input class="form-control" type="number" id="price" name="SPrice"/>
 
                                 <label style="margin-top: 10px; display:block;" for="contain">Keyword</label>
-                                <input class="form-control" type="text" name="keyword"/>
+                                <input class="form-control" type="text" id="key" name="keyword"/>
 
-                                <button type="submit" class="btn btn-success btn-block" style="margin-top: 15px; display:block; height:35px;"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+                                <button type="submit" id="disbutton" class="btn btn-success btn-block" style="margin-top: 15px; display:block; height:35px;"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
 
                               </form>
-                              <?php 
+
                               
-
-                              if (isset($_GET["keyword"]) && $_GET["keyword"] != "") {
-                                if (isset($_GET["SPrice"]) && $_GET["SPrice"] != "") {
-                                  if (isset($_GET["ItemCon"])) {
-                                    if (isset($_GET["ItemT"])) {
-                                      unset($GridInfo);
-                                      unset($GridImages);
-                                      $objects2 = displayAuctionAdvanced($_GET["ItemT"], $_GET["ItemCon"], $_GET["SPrice"], $_GET["keyword"]);
-
-                                      $GridInfo = $objects2[0];
-                                      $GridImages = $objects2[1];
-                                    }}}} ?>
                                   </a>
                                 </li>
                               </ul>
@@ -156,10 +141,10 @@ require_once("../includes/functions_db.php");
 
                   <?php if (empty($_SESSION["id"])): ?>
                     <ul class="nav navbar-nav navbar-right">
-                      <li><a href="login.php"><span class="glyphicon glyphicon-log-in">
-                      </span> Sign In</a></li>
                       <li><a href="register.php"><span class="glyphicon glyphicon-user">
                       </span> Sign Up</a></li>
+                      <li><a href="login.php"><span class="glyphicon glyphicon-log-in">
+                      </span> Login</a></li>
                     </ul>
                     
                   <?  else: ?>
@@ -174,11 +159,13 @@ require_once("../includes/functions_db.php");
                         <div class="dropdown-menu dropdown-profile" aria-labelledby="dropdownMenuButton">
                           <a class="dropdown-item" href="profile.php">Edit Profile</a><br>
 
-                          <?php if($_SESSION["role"] == 'buyer'){ ?>
+                          <?php if($_SESSION["role"] == 1){ ?>
                           <a class="dropdown-item" href="mybids.php">My Bids</a><br>
-                          <a class="dropdown-item" href="#">Watch List</a>
-                          <?php } else if($_SESSION["role"] == 'seller') { ?>
-                          <a class="dropdown-item" href="#">My Auctions</a><br>
+                          <a class="dropdown-item" href="watchlist.php">Watch List</a><br>
+                          <a class="dropdown-item" href="buyingsummary.php">My Purchases</a><br>
+                          <a class="dropdown-item" href="recommendations.php">Recommendations</a>
+                          <?php } else if($_SESSION["role"] == 2) { ?>
+                          <a class="dropdown-item" href="myauctions.php">My Auctions</a><br>
                           <a class="dropdown-item" href="add_item.php">Create Auction</a>
                           <?php } ?>
 
@@ -194,3 +181,5 @@ require_once("../includes/functions_db.php");
           </div>
         </div>
       </header>
+    
+<body>
