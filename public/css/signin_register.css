@@ -1,0 +1,112 @@
+
+body {
+  background-image: url("/img/login_background.jpg");
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.login-container {
+
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(30, 30, 30, 0.7);
+  padding: 10px 60px 30px 60px;
+  border-radius: 3em;
+}
+
+.container-register {
+
+  padding: 0px 50px 0px 50px;
+  margin-top: 20px;
+  width: 750px;
+
+}
+
+.radio-buttons {
+  color:white;
+  position: absolute;
+  right: 0px;
+  width: 310px;
+  padding: 10px;
+}
+
+.radio-buttons input {
+  width: 20px; background-color: white;
+}
+
+
+.right-side-form {
+  float:right;
+}
+
+.left-side-form {
+  float:left;
+}
+
+
+h3 {
+  color:white;
+}
+
+.form-control {
+  width: 200px;
+}
+
+.form-group_register {
+  width:300px;
+}
+
+.form-group_register input {
+  width: 300px;
+}
+
+.register a {
+  text-decoration: none;
+  color: rgba(220, 220, 220, 1);
+}
+
+.register a:hover {
+  color: white;
+}
+
+.register {
+  color:rgba(120, 120, 120, 1);
+}
+
+.register p {
+  width: 130%;
+}
+
+@media (max-width: 768px) {
+
+  .container-register {
+    margin-top: 150px;
+    margin-bottom: 100px;
+    width: 80%;
+  }
+  .right-side-form {
+    float:left;
+  }
+
+  .radio-buttons {
+    position:relative;
+    padding: 10px;
+    margin-bottom: -10px;
+    width: 100%;
+  }
+  .register p {
+    width: 100%;
+  }
+}
+
+@media (max-width: 468px) {
+
+  .container-register {
+    width: 100%;
+  }
+}

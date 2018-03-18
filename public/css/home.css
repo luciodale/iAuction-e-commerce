@@ -1,0 +1,198 @@
+/* CUSTOMIZE THE CAROUSEL
+-------------------------------------------------- */
+
+/* Carousel base class */
+.carousel {
+  height: 500px;
+  margin-bottom: 60px;
+}
+/* Since positioning the image, we need to help out the caption */
+.carousel-caption {
+  z-index: 10;
+}
+
+/* Declare heights because of positioning of img element */
+.carousel .item {
+  height: 500px;
+  background-color: #777;
+}
+.carousel-inner > .item > img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  min-width: 100%;
+  height: 500px;
+}
+
+/* Responsive Images in carousel*/
+
+.carousel-item .img-fluid {
+  width:100%;
+  height:100%;
+}
+
+/* ITEMS (CARDS) CSS
+-------------------------------------------------- */
+
+/*container of all items*/
+.container-items {
+  width:80%;
+  margin:auto;
+}
+
+/*container single card*/
+.thumbnail {
+  padding: 0;
+  box-shadow: 0 0 4px 1px rgba(0, 0, 0, 0.2);
+  margin-top: 15px;
+}
+
+/*container image to prevent it to go out of the boundaries when hover*/
+.item-img {
+  overflow: hidden;  
+  height:270px;
+  border-top-left-radius:4px;
+  border-top-right-radius:4px;
+}
+
+/*transition to minimize it when mouse is not hover*/
+.item-img img {
+  min-width: 100%;
+  height:270px;
+  transition: transform 0.3s;
+}
+
+/*hover effect for image*/
+.item-img:hover img {
+  -moz-transform: scale(1.2);
+  -webkit-transform: scale(1.2);
+  transform: scale(1.2);
+}
+
+
+/* CARD BUTTONS CSS
+-------------------------------------------------- */
+
+.card-buttons {
+  cursor: pointer;
+  column-count: 2;
+  column-gap: 0;
+  column-rule: 1px solid #DCDCDC;
+  column-span: all;
+  height:50px;
+
+}
+
+.card-buttons p {
+  margin: 0;
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 110%;
+  font-weight: bold;
+
+
+}
+
+.card-buttons a {
+  height:50px;
+  width:100%;
+  border-top: 1px solid #DCDCDC;
+  text-decoration: none;
+  -webkit-transition-duration: 0.2s; /* Safari */
+  transition-duration: 0.2s;
+}
+
+.button-left {
+  float:left;
+  color:#ADD8E6;
+  border-bottom-left-radius:4px;
+}
+
+.button-right {
+  float: right;
+  color: #F08080;
+  border-bottom-right-radius:4px;
+}
+
+.card-buttons a:hover {
+  color: white;
+  -webkit-transition-duration: 0.2s; /* Safari */
+  transition-duration: 0.2s;
+  text-decoration: none;
+}
+
+.button-left:hover {
+  background-color: #ADD8E6;
+
+}
+
+.button-right:hover {
+  background-color: #F08080;
+}
+
+.caption {
+  height:170px;
+  max-width: 100%;
+  -ms-word-break: break-all;
+  word-break: break-all;
+  word-break: break-word;
+  -webkit-hyphens: auto;
+  -moz-hyphens: auto;
+  hyphens: auto;
+}
+
+.description-scroll {
+  height:40px;
+  overflow-y: scroll;
+}
+
+/* CARD TIMER CSS
+-------------------------------------------------- */
+
+.time-tag {
+
+  width:100%;
+  background-color: rgba(128,128,128, 0.7); 
+  margin-top:-40px; 
+  position: relative; 
+  height: 40px;
+  padding: 10px 0;
+  text-align: center;
+  color:white;
+
+}
+
+.counter {
+  margin:auto;
+  font-size: 110%;
+  font-weight: bold;
+}
+
+
+
+
+/* RESPONSIVE CSS
+-------------------------------------------------- */
+
+@media (min-width: 768px) {
+
+  /* Bump up size of carousel content */
+  .carousel-caption p {
+    margin-bottom: 20px;
+    font-size: 21px;
+    line-height: 1.4;
+  } 
+}
+
+@media (max-width: 992px) {
+
+
+}
+
+@media (max-width: 768px) {
+
+
+
+}

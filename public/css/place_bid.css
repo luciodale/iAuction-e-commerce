@@ -1,0 +1,48 @@
+
+
+.container-top-margin {
+  margin-top: 100px;
+}
+
+/*carousel size*/
+.carouselPersonal {
+  height:270px;
+  overflow: hidden;
+}
+
+/*carousel images handling*/
+.carouselPersonal > .carousel-inner > .item > img {
+  object-fit: cover;
+  min-height:270px;
+  width: auto;
+  height: auto;
+}
+
+/*div that shows the list of all bids*/
+#overlay {
+  position: fixed;
+  display: none;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0,0,0,0.5);
+  z-index: 2;
+  cursor: pointer;
+}
+
+/*box the shows bid now button and buy now button*/
+.bid-box {
+  width: 400px; 
+  height: 600px; 
+  padding: 20px;
+}
+
+.bid-button {
+  margin-top: 15px; 
+  display: block; 
+  height:35px;
+}
+
