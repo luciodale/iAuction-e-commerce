@@ -2,4 +2,5 @@
 
 config.php
 connectSQL.php
+queries_to_create_db.sql
 
